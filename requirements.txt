@@ -1,5 +1,4 @@
 asgiref==3.5.2
-backports.zoneinfo==0.2.1
 certifi==2022.6.15
 cffi==1.15.1
 charset-normalizer==2.1.0
@@ -8,7 +7,7 @@ defusedxml==0.7.1
 dj-database-url==1.0.0
 dj-email-url==1.0.5
 Django==4.0.4
-django-allauth==0.50.0
+django-allauth==0.51.0
 django-cache-url==3.4.2
 django-crispy-forms==1.14.0
 django-debug-toolbar==3.2.4
@@ -39,4 +38,4 @@ sqlparse==0.4.2
 tifffile==2022.7.31
 tzdata==2022.1
 urllib3==1.26.11
-whitenoise==6.0.0
+whitenoise==6.2.0
