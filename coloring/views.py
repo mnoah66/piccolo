@@ -1,12 +1,16 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.core.files import File
 
-import io
+import io, os
+from io import BytesIO
+import tempfile
 
 import numpy as np
 import skimage
+
 from PIL import Image, ImageOps
 from PIL.Image import Image as PilImage
 
@@ -26,7 +30,13 @@ def coloring_page(request):
             file = request.FILES["file"]
             if file is None:
                 return HttpResponse("Missing input-image parameter")
-            input_image = Image.open(file)
+            
+            if file.size > 1024 * 1024:
+                compressed_file = compress(file)    
+                input_image = Image.open(compressed_file)
+            else:        
+                input_image = Image.open(file)
+            
             output_image = generate_coloring_page(input_image)
 
             image_io = io.BytesIO()
@@ -37,6 +47,15 @@ def coloring_page(request):
             response = HttpResponse(image_io, content_type='image/png')
             
             return response
+        else:
+            return JsonResponse({"error": form.errors}, status=403)
+    return render(request, 'index.html', {'form': form})
+def compress(image):
+    im = Image.open(image)
+    im_io = BytesIO() 
+    im.save(im_io,"png", optimize=True, quality=20) 
+    new_image = File(im_io, name=image.name)
+    return new_image
 
 def generate_coloring_page(input: PilImage) -> PilImage:
     # Convert to grayscale if needed

@@ -25,6 +25,7 @@ const eDownloadButton = document.getElementById('download-button')
 const ePrintButton = document.getElementById('print-button')
 const myUrl = document.getElementById('url').getAttribute('data-url')
 const csrf = document.getElementById('csrf').getAttribute('data')
+const errorPlaceholder = document.getElementById('errorPlaceholder')
 var dropEffect = 'none'
 
 async function fetchColoringPage(inputFile) {
@@ -36,9 +37,9 @@ async function fetchColoringPage(inputFile) {
     const init = { method: 'POST', body: formData }
     try {
         const response = await fetch(url, init)
-        return response.ok ? response.blob() : null
+        return response.ok ? response.blob() : console.log(response.text().then(data => errorPlaceholder.innerHTML = JSON.parse(data)['error']['file']))
     } catch (error) {
-        console.error(error)
+        console.log(error)
         return null
     }
 }

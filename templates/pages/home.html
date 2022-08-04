@@ -5,8 +5,11 @@
 
 {% block content %}
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-  <h1>Piccolo</h1>
+  <h1>Piccolo</h1><span><strong>Pic</strong>ture to <strong>colo</strong>ring page (terrible, I know).</span>
   <img src="{% static 'images/preview.gif' %}" class="img-fluid" alt="DjangoX logo"/>
   <p class="lead">A <a href="https://github.com/wsvincent/djangox">DjangoX</a> version of GitHub user <a href="https://github.com/PicardParis">Laurent Picard's</a> image processing <a href="https://github.com/PicardParis/cherry-on-py/tree/main/cr_image_processing">demo</a>, based on this Google Cloud <a href="https://cloud.google.com/blog/topics/developers-practitioners/deploy-coloring-page-generator-minutes-cloud-run">article.</a></p>
+</div>
+<div>
+  <p>Please read this <a href="https://pythonspeed.com/articles/numpy-memory-footprint/">article</a> about Numpy arrays and memory.  If, for example, you deploy to Heroku on a free tier, the app will likely run out of memory and crash when a large image file is uploaded.</p>
 </div>
 {% endblock content %}

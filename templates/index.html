@@ -7,6 +7,7 @@
     <h1>Coloring Page Generator</h1>
     <sl-card>
         <div id="input-block">
+            <p id="errorPlaceholder"></p>
             <input type="hidden" id="url" data-url="{{url}}">
             <input type="hidden" id="csrf" name="csrfmiddlewaretoken" data="{{csrf_token}}">
             <label for="input">Drop or select the picture to process</label>
